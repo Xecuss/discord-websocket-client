@@ -1,0 +1,28 @@
+{
+  "name": "discord-websocket-client",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "tsc && node ./dist/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xecuss/discord-websocket-client.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Xecuss/discord-websocket-client/issues"
+  },
+  "homepage": "https://github.com/Xecuss/discord-websocket-client#readme",
+  "devDependencies": {
+    "@types/node": "^14.0.27",
+    "@types/ws": "^7.2.6",
+    "typescript": "^3.9.7"
+  },
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "ws": "^7.3.1"
+  }
+}
