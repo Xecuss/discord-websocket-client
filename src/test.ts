@@ -1,3 +1,6 @@
-let test: string = 'Hello World';
+import axios from 'axios';
 
-console.log(test);
+(async () => {
+    const res = await axios.get('https://google.com');
+    console.log(res);
+})();

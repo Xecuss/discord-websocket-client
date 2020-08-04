@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "tsc && node ./dist/test.js"
+    "test": "tsc && node ./dist/test.js",
+    "start": "npm run rebuild && node ./dist/index.js",
+    "rebuild": "rm -rf ./dist && tsc"
   },
   "repository": {
     "type": "git",
@@ -19,6 +21,7 @@
   "devDependencies": {
     "@types/node": "^14.0.27",
     "@types/ws": "^7.2.6",
+    "axios": "^0.19.2",
     "typescript": "^3.9.7"
   },
   "dependencies": {
