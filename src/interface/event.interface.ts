@@ -11,11 +11,14 @@ export class IChannelMsgEvent implements IBaseEvent{
     public data: any = Object.create(null);
 
     constructor(msg: Message){
+        let { embeds, content, reference, channel, mentions, attachments } = msg;
         this.data = {
             sender: msg.author,
-            channel: msg.channel,
-            content: msg.content,
-            reference: msg.reference
+            channel,
+            content,
+            reference,
+            mentions,
+            attachments
         }
     }
 }

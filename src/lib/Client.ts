@@ -110,7 +110,7 @@ export default class DClient{
         let dc = this.dClient;
 
         dc.on('message', (msg) => {
-            Logger.log(msg.content);
+            Logger.log(msg.embeds);
             let sendData = new IChannelMsgEvent(msg);
             console.log(JSON.stringify(sendData));
             this.wsClient.send(JSON.stringify(sendData));
