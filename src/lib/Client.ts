@@ -111,6 +111,7 @@ export default class DClient{
         let dc = this.dClient;
 
         dc.on('message', (msg) => {
+            if(msg.author.id === dc?.user?.id) return;
             //Logger.log(msg.embeds);
             let sendData = new IChannelMsgEvent(msg);
             this.wsClient.send(JSON.stringify(sendData));
