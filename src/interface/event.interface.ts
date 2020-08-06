@@ -1,4 +1,4 @@
-import { Message } from "discord.js";
+import { Message, MessageAttachment } from "discord.js";
 
 interface IBaseEvent{
     type: string;
@@ -12,13 +12,27 @@ export class IChannelMsgEvent implements IBaseEvent{
 
     constructor(msg: Message){
         let { embeds, content, reference, channel, mentions, attachments } = msg;
+        let attachMentsArray: Array<MessageAttachment> = [];
+        attachments.forEach( v => {
+            attachMentsArray.push(v);
+        });
+
+        let mentionsArray: Array<any> = [];
+        if(mentions.everyone) mentionsArray.push('everyone');
+        if(mentions.members){
+            mentions.members.forEach( v => {
+                //console.log(v);
+                mentionsArray.push(v.id);
+            });
+        }
+        
         this.data = {
             sender: msg.author,
             channel,
             content,
             reference,
-            mentions,
-            attachments
+            mentions: mentionsArray,
+            attachments: attachMentsArray
         }
     }
 }

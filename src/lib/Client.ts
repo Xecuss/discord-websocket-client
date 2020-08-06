@@ -3,6 +3,7 @@ import WebSocket from 'ws';
 import { IClientConfig } from '../interface/interface';
 import { IAction } from '../interface/api.interface';
 import { IChannelMsgEvent } from '../interface/event.interface';
+import { decodeRawMsg } from './decodeRawMsgStruct';
 
 class Logger{
     static d(){
@@ -75,15 +76,15 @@ export default class DClient{
         this.wsClient.send(JSON.stringify(replyData));
     }
 
-    private async sendMsgByChannelId(id: string, msg: string): Promise<void>{
+    private async sendMsgByChannelId(id: string, msg: any): Promise<void>{
         let guilds = this.dClient.guilds.cache;
         for(let [k, v] of guilds){
             let channel = v.channels.cache.find( x => x.id === id);
-            if(channel){
-                await (<TextChannel>channel).send(msg);
+            if(channel && channel instanceof TextChannel){
+                await channel.send(decodeRawMsg(channel, msg));
             }
             else{
-                Logger.error(`未找到channel id: ${id}`);
+                Logger.error(`非法channel id: ${id}`);
             }
         }
     }
@@ -110,9 +111,8 @@ export default class DClient{
         let dc = this.dClient;
 
         dc.on('message', (msg) => {
-            Logger.log(msg.embeds);
+            //Logger.log(msg.embeds);
             let sendData = new IChannelMsgEvent(msg);
-            console.log(JSON.stringify(sendData));
             this.wsClient.send(JSON.stringify(sendData));
         });
 
